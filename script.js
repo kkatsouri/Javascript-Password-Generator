@@ -42,7 +42,9 @@ function generatePassword() {
 //then adding an if statement to make sure a number within 8-128 is entered, and is entered as digits not a string
 //then continue to use if statements to ask user to define other password criteria. 
 //combine var criteria with lowercase, uppercase etc. 
+//criteria array included here as empty array to make sure function starts fresh each time
 function promptSelections() { 
+  criteria = []
   lengthOfPassword = parseInt(window.prompt("Select password length. Enter number between 8 and 128"));
  
   if((isNaN(lengthOfPassword)) || lengthOfPassword < 8 || lengthOfPassword > 128) {
@@ -55,8 +57,11 @@ function promptSelections() {
   if (window.confirm ("Include uppercase?")){
     criteria = criteria.concat(upperCase);
   }
-  if (window.confirm ("Include uppercase?")){
-    criteria = criteria.concat(upperCase);
+  if (window.confirm ("Include numbers?")){
+    criteria = criteria.concat(numeric);
+  }
+  if (window.confirm ("Include special characters?")){
+    criteria = criteria.concat(specialCharacters);
   }
   return true;
 }
