@@ -13,13 +13,30 @@ var generateBtn = document.querySelector("#generate");
 generateBtn.addEventListener("click", writePassword);
  addEventListener()
 
-//What happens when the button is pressed (writePassword)
+//What happens when the button is pressed, password to the #password output
 function writePassword () {
   var rightPrompts = promptSelections(); 
-  var passwordText = document.querySelector("#password")
+  var passwordText = document.querySelector("#password");
+
+  if (rightPrompts) {
+    var password = generatePassword();
+    passwordText.value = password;
+  } else {
+    passwordText.value = "";
+  }
 }
- //Console says generatePassword is not defined. So here I am writing a function to define generatePassword
+ //Console says generatePassword is not defined. Here I am defining as the equation for generating a random password from criteria
+ //Math.floor gives us the nearest whole number from Math.random
+ //Math.random generates a random integar between 0 and 1.
+ //This is then multiplied by the criteria given by the user and length of the array 
 function generatePassword() {
+  var password = "";
+  for(var i = 0; i < lengthOfPassword; i++) {
+    var passwordOutput = Math.floor(Math.random() * criteria.length);
+    password = password + criteria[passwordOutput];
+  }
+  return password;
+}
 
 //First use a function to ask user for length of password, use parseInt to change the returned string to an integar
 //then adding an if statement to make sure a number within 8-128 is entered, and is entered as digits not a string
@@ -43,13 +60,3 @@ function promptSelections() {
   }
   return true;
 }
-
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
-
-}
-
